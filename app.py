@@ -1,5 +1,6 @@
 import asyncio
 from aiogram import executor
+
 import filters
 import handlers
 from loader import dp
@@ -22,6 +23,9 @@ async def main():
 
     async with server:
         await server.serve_forever()
+
+    # Start the bot executor after setting up the TCP server
+    executor.start_polling(dp)
 
 if __name__ == '__main__':
     asyncio.run(main())
