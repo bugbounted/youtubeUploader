@@ -1,24 +1,22 @@
-from flask import Flask, render_template
-from threading import Thread
+from flask import Flask
+
+# Import your aiogram related code
 from aiogram import executor
 import filters
 import handlers
 from loader import dp
 
+# Create a Flask app
 app = Flask(__name__)
 
-# Define your Flask route for the index page
+# Define a route for your index page
 @app.route('/')
 def index():
-    return render_template('index.html')  # Replace 'index.html' with your actual HTML file
-
-def run_flask():
-    app.run(port=8000)  # Run Flask on port 8000
+    return 'Hello, World! This is your index page.'
 
 if __name__ == '__main__':
+    # Run Flask app on port 8000
+    app.run(port=8000, debug=True, threaded=True)
+
     # Start aiogram polling
-    executor.start_polling(dp, skip_updates=True)
-    
-    # Start Flask in a separate thread
-    flask_thread = Thread(target=run_flask)
-    flask_thread.start()
+    executor.start_polling(dp)
