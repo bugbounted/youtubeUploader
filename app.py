@@ -15,4 +15,4 @@ if __name__ == '__main__':
     executor.start_polling(dp)
 
     # Run the Flask app on port 8000
-    app.run(host='0.0.0.0', port=8000)
+    app.run(host='127.0.0.1', port=8000)
