@@ -1,4 +1,4 @@
-from aiogram import executor
+from aiogram.utils import executor
 
 import filters
 import handlers
