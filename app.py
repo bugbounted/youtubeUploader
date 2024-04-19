@@ -1,3 +1,4 @@
+from threading import Thread
 from flask import Flask
 
 # Import your aiogram related code
@@ -14,9 +15,14 @@ app = Flask(__name__)
 def index():
     return 'Hello, World! This is your index page.'
 
-if __name__ == '__main__':
+def start_flask():
     # Run Flask app on port 8000
     app.run(port=8000, debug=True, threaded=True)
+
+if __name__ == '__main__':
+    # Start Flask app in a separate thread
+    flask_thread = Thread(target=start_flask)
+    flask_thread.start()
 
     # Start aiogram polling
     executor.start_polling(dp)
