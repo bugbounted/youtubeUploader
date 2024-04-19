@@ -7,4 +7,4 @@ load_dotenv()
 
 BOT_TOKEN = str(os.getenv("BOT_TOKEN"))
 
-ADMIN_ID = []
+ADMIN_ID = [851576081]
