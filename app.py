@@ -1,28 +1,24 @@
-from threading import Thread
-from flask import Flask
-
-# Import your aiogram related code
+from aiohttp import web
 from aiogram import executor
+import asyncio
+
 import filters
 import handlers
 from loader import dp
 
-# Create a Flask app
-app = Flask(__name__)
+async def index(request):
+    return web.Response(text="Hello, World! This is your index page.")
 
-# Define a route for your index page
-@app.route('/')
-def index():
-    return 'Hello, World! This is your index page.'
-
-def start_flask():
-    # Run Flask app on port 8000
-    app.run(port=8000, debug=True, threaded=True)
+async def start_webapp():
+    app = web.Application()
+    app.router.add_get('/', index)
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, '127.0.0.1', 8000)
+    await site.start()
 
 if __name__ == '__main__':
-    # Start Flask app in a separate thread
-    flask_thread = Thread(target=start_flask)
-    flask_thread.start()
-
-    # Start aiogram polling
-    executor.start_polling(dp)
+    loop = asyncio.get_event_loop()
+    loop.create_task(start_webapp())
+    loop.create_task(executor.start_polling(dp))
+    loop.run_forever()
