@@ -17,7 +17,7 @@ def send_video(title, description, video):
       'tags': ['Travel', 'test']
     },
     'status': {
-      'privateStatus': 'public',
+      'privateStatus': 'private',
       'selfDeclaredMadeForKids': False,
     },
     'notifySubscribers': True
